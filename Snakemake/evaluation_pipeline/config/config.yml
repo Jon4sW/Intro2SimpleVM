@@ -1,0 +1,70 @@
+
+### callsets to be used as input to genotyping tools (multiple ones can be listed)
+callsets:
+    HGSVC:
+        # multi-allelic VCF file
+        multi: "reduced-data/Pangenome_graph_freeze3_64haplotypes.vcf.gz"
+        # bi-allelic VCF file
+        bi: "reduced-data/Callset_freeze3_64haplotypes.vcf.gz"
+        # reference genome in FASTA format
+        reference: "reduced-data/GRCh38_full_analysis_set_plus_decoy_hla.fa"
+        reference_fai: "reduced-data/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai"
+        leave1out: # specify the samples to evaluate on
+            NA24385:
+                regions: # options: all, multi, bi
+                    - all
+                    - multi
+                    - bi
+                filters: # options: all, typable
+                    - typable
+                vartype: # variants contained in the callset. Options are: snp|indels|large-deletion|large-insertion
+                    - snp 
+                    - indels
+                    - large-deletion
+                    - large-insertion
+        external: # specify the samples to (externally) evaluate on
+            NA24385: 
+                path: "reduced-data/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz" # benchmark dataset used a truth for external evaluation 
+                callable_regions: "data/downloaded/vcf/giab/hg38/HG002_GRCh38_1_22_v4.2.1_benchmark.bed" # path to BED with callable regions
+                vartype: # options: snp-indel, sv
+                    - snp-indel
+                    - sv
+                regions: # options: all, multi, bi
+                    - all
+                filters: # options: all, typable
+                    - typable
+                    
+
+# read data. File required that specifies a sample name, path to FASTA/FASTQ data and superpopulation:
+# FamilyID	SampleID	FatherID	MotherID	Population	Superpopulation	Sample_Illumina
+reads: "resources/reads_reduced.tsv"
+
+
+# PanGenie command. Different versions can be run by listing several commandlines
+pangenie: {}
+    
+
+# PanGenie command to be used for modularised versions of PanGenie
+pangenie-modules: 
+    pangenie.v3: "/usr/local/bin/PanGenie_v3.0.0"
+
+
+# Downsampling coverages for leave-one-out experiment. If reads shall not be downsampled, leave empty.
+downsampling: []
+
+
+# Other programs
+programs:
+    rtg: "/home/ubuntu/rtg-tools-3.12.1/rtg"
+    bwa: "/usr/bin/bwa"
+    bayestyper: "/usr/local/bin/bayesTyper"
+    bayestyper_tools: "/usr/local/bin/bayesTyperTools"
+    graphtyper: "/usr/local/bin/graphtyper"
+    kmc: "/usr/bin/kmc"
+    truvari: "/usr/local/bin/truvari"
+
+
+# Other parameters
+utils:
+    bayestyper_reference_canon: "data/downloaded/bayestyper_utils/bayestyper_GRCh38_bundle_v1.3/GRCh38_canon.fa"
+    bayestyper_reference_decoy: "data/downloaded/bayestyper_utils/bayestyper_GRCh38_bundle_v1.3/GRCh38_decoy.fa"

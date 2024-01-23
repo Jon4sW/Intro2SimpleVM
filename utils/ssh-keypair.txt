@@ -1,0 +1,6 @@
+ssh-keygen -t ed25519 -C "user.email"
+chmod 400 ~/.ssh/id_ed25519
+
+### adding the key to the agent in order to use GitHub later
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
