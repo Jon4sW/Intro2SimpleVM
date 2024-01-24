@@ -1,3 +1,15 @@
+git config --global user.email "useremail@hhu.de"
+git config --global user.name "username123"
+git remote set-url origin ssh_github_url
+--> change the url for the remote repo
+
+git config pull.rebase false
+--> merge branches - default strategy
+
+New SSH access: 
+---> https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
+
+Basically:
 ssh-keygen -t ed25519 -C "user.email"
 chmod 400 ~/.ssh/id_ed25519
 
