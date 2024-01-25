@@ -47,11 +47,11 @@ Please feel free to adapt the values `nickname_to_access_this_host`, `VM_IP_addr
 
 Now you can access your VM with `ssh nickname_to_access_this_host`. 
 
-- Before proceeding to the software installation, fork this repo to create your OWN copy of the repo and then clone it in the VM home directory with `git clone https://github.com/{your_username}/Intro2SimpleVM.git`.
+- Before proceeding to the software installation, **fork** this repo to create your OWN copy of the repo and then clone it in the VM home directory with `git clone https://github.com/{your_username}/Intro2SimpleVM.git`.
 
-- Install necessary software for the Snakemake pipeline execution. To do so, look at file [software installation](https://github.com/albertodescalzo/Intro2SimpleVM) and execute it with `VMs/install-software.sh`.
+- Install necessary software for the Snakemake pipeline execution. To do so, look at file [software installation](https://github.com/albertodescalzo/Intro2SimpleVM) and execute it with `VMs/install-software.sh`. After the installation process complete, log out and log in again. Next, run `VMs/test-software.sh`. Observe whether the different software packages were installed correctly or contrarily there is any error.
 
-- Delete the VM machine
+- Delete the VM machine (if you have the permissions for that, otherwise ask your administrator).
 
 
 # 2. Research Environments
@@ -69,7 +69,8 @@ For a more accurate desccription of what the pipeline do, please read [here](htt
 
 We'll run the workflow with the following commands:
 
-- `snakemake --profile workflow/profiles download_data` 
+- `cd evaluation_pipeline`
+- `snakemake --profile workflow/profile-default/ -s workflow/rules/download-data.smk  download_data` 
 - `workflow/scripts/reduce-data.sh`
 - `snakemake --profile workflow/profiles evaluation` 
 
@@ -95,11 +96,10 @@ Note: Please consider this additional step if you renamed your created ssh key a
 
 In order to demonstrate how powerful Ansible is, we'll repeat step 1 , however, for the installation of the software, we'll do it locally (i.e. from our laptop, instead of connecting to the VM and execution the shell script). To do so, we first need to install Ansible as described in Requirements. Then, follow the next steps in your locally clone repo:
 
+- In the [inventory file](https://github.com/albertodescalzo/Intro2SimpleVM/Ansible/inventory), specify your VM hostname under "[my_machines]". Moreover, in `Ansible/main.yml` comment the line `hosts: localhost` and uncomment `#hosts: denbi_vms`.
 
-- In the [inventory file](https://github.com/albertodescalzo/Intro2SimpleVM/Ansible/inventory), specify your VM hostname under "[my_machines]".
+- Download the Pangenotyping role from the Ansible-Galaxy community by executing `ansible-galaxy role install albertodescalzo.pangenotyping`
 
-- Download the Pangenotyping role from the Ansible-Galaxy community by executing `ansible-galaxy role install albertodescalzo.Pangenotyping`
+- Then, clone the repo in  your desired directory, and execute `ansible-playbook Ansible/main.yml` in the directory folder.
 
-`ansible-playbook Ansible/main.yml`
-
-For more details about the tasks in the role, please visit [the role description](https://github.com/albertodescalzo/ansible-role-Pangenotyping).
+For more details about the tasks in the role, please visit [the role description](https://github.com/albertodescalzo/ansible-role-pangenotyping). More roles can be found under [Ansible-Galaxy website](https://galaxy.ansible.com/ui/standalone/roles/).

@@ -1,6 +1,7 @@
 ---
 - name: Installing Pangenotyping role from Ansible-Galaxy
-  hosts: denbi_vms
+  #hosts: denbi_vms
+  hosts: localhost
   roles:
-    - albertodescalzo.Pangenotyping
+    - albertodescalzo.pangenotyping
 ...
