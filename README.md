@@ -79,6 +79,17 @@ To observe/modify the files' content, access the web-based research environment 
 
 Since in Step 1 you forked this repo, we'll perform some modifications and add them to your forked repository. 
 
+After the modifications have been carried out, follow these steps:
+
+- Access your VM
+- Create a ssh-keypair with `ssh-keygen -t ed25519 -C "user.email"`. This will generate the public and private keys in `~/.ssh/id_ed25519`. Moreover, run `chmod 400 ~/.ssh/id_ed25519` so that the key is only readable by your user.
+- In GitHub: Go to `Settings` > `SSH and GPG keys` > `New SSH key` > Add your public key.
+
+Now you should be able to pull/push/etc... to your repo. To check it, run:
+
+- `git clone ssh_URL_repository`, similar to `git clone git@github.com:Github_user/repo.git`
+
+Note: Please consider this additional step if you renamed your created ssh key adding it to the ssh agent every time (per sign in) if you want to use it. This can be achieved with the commands: `eval "$(ssh-agent -s)"`and `ssh-add ~/.ssh/keyname`.
 
 5. (Advanced) Automation with Ansible
 
