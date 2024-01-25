@@ -16,8 +16,6 @@ rule download_data:
 
         # references + indexing
         'data/downloaded/fasta/GRCh38_full_analysis_set_plus_decoy_hla.fa',
-        'data/downloaded/fasta/GRCh38_full_analysis_set_plus_decoy_hla.fa.fai',
-        "data/downloaded/fasta/GRCh38_full_analysis_set_plus_decoy_hla.fa.ann",
         
         # Input Pangenome Graph (PanGenie Github)
         'data/downloaded/vcf/HGSVC-GRCh38/Pangenome_graph_freeze3_64haplotypes.vcf.gz',
@@ -30,12 +28,6 @@ rule download_data:
 
         ## Download GRCh38 bundle for BayesTyper
         "data/downloaded/bayestyper_utils/bayestyper_GRCh38_bundle.tar.gz",
-
-        ## Download HG002/NA24385 benchmark external validation dataset
-        "data/downloaded/vcf/giab/hg38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz",
-        "data/downloaded/vcf/giab/hg38/HG002_GRCh38_1_22_v4.2.1_benchmark.vcf.gz.tbi",
-        "data/downloaded/vcf/giab/hg38/HG002_GRCh38_1_22_v4.2.1_benchmark.bed"
-
 
         
 
@@ -103,8 +95,9 @@ rule download_HPRC_GRCh38_88haplotypes_callset:
 ######################   Download reads  GIAB   ####################
 ####################################################################
 
-### SAMPLE 24385
-numbers = ['00' + str(i) for i in range(1,3)] 
+### SAMPLE NA24385
+#numbers = ['00' + str(i) for i in range(1,10)] + ['0' + str(i) for i in range(10,18)]
+numbers = ['00' + str(i) for i in range(4,6)]
 
 rule download_giab_fastq:
 	output:
@@ -114,7 +107,8 @@ rule download_giab_fastq:
 
 rule combine_giab_fastq:
 	input:
-		expand("data/downloaded/reads/NA24385/raw/D1_S1_{l}_R{r}_{n}.fastq.gz", l = ['L001', 'L002'], r = ['1', '2'], n = numbers)
+		expand("data/downloaded/reads/NA24385/raw/D1_S1_{l}_R{r}_{n}.fastq.gz", l = ['L001'], r = ['1'], n = numbers)
+		#expand("data/downloaded/reads/NA24385/raw/D1_S1_{l}_R{r}_{n}.fastq.gz", l = ['L001', 'L002'], r = ['1', '2'], n = numbers)
 	output:
 		"data/downloaded/reads/NA24385/NA24385_raw.fastq.gz"
 	shell:
@@ -157,7 +151,7 @@ rule download_fastq:
 
 rule combine_fastq:
 	input:
-		lambda wildcards: expand("data/downloaded/reads/{{sample}}/{{sample}}_{number}.fastq.gz", number = ['1', '2'])
+		lambda wildcards: expand("data/downloaded/reads/{{sample}}/{{sample}}_{number}.fastq.gz", number = ['1'])
 	output:
 		"data/downloaded/reads/{sample}/{sample}_raw.fastq.gz"
 	shell:
@@ -212,11 +206,7 @@ rule download_BayesTyper_GRCh38_bundle:
         file_id = "1ioTjLFkfmvOMsXubJS5_rwpfajPv5G1Q"
     shell:
         """
-        wget --load-cookies /tmp/cookies.txt \
-        "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate \
-        'https://drive.google.com/uc?export=download&id={params.file_id}' -O- | \
-        sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\\1\\n/p')&id={params.file_id}" \
-        -O {output.compressed_bundle} && rm -rf /tmp/cookies.txt
+        gdown {params.file_id} -O {output.compressed_bundle}
         
         tar -xvf {output.compressed_bundle} -C {output.uncompressed_bundle} 
         """

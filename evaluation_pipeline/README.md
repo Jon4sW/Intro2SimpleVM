@@ -198,7 +198,7 @@ The download data workflow can be run using the following command:
 
 The leave-one-out workflow can be run using the following command:
 
-``  snakemake --profile workflow/profiles evaluation  ``
+``  snakemake --profile workflow/profiles leave_one_out  ``
 
 ## Acknowledgements
 
