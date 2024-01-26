@@ -49,7 +49,7 @@ Now you can access your VM with `ssh nickname_to_access_this_host`.
 
 - Before proceeding to the software installation, **fork** this repo to create your OWN copy of the repo and then clone it in the VM home directory with `git clone https://github.com/{your_username}/Intro2SimpleVM.git`. Note: See Section 4 if you get `Permission denied (publickey)`. You'll need to set up an authentification between your VM and your GitHub (e.g. through an SSH key). 
 
-- Install necessary software for the Snakemake pipeline execution. To do so, inspect the file [software installation](https://github.com/albertodescalzo/Intro2SimpleVM/VMs/install-software.sh) and from the `Intro2SimpleVM` folder execute it with `VMs/install-software.sh`. During installation you might be asked to accept package updates as well as to restart the services running (pink screen) --> press Enter.
+- Install necessary software for the Snakemake pipeline execution. To do so, inspect the file [software installation]([https://github.com/albertodescalzo/Intro2SimpleVM/VMs/install-software.sh](https://github.com/albertodescalzo/Intro2SimpleVM/blob/main/VMs/install-software.sh)) and from the `Intro2SimpleVM` folder execute it with `VMs/install-software.sh`. During installation you might be asked to accept package updates as well as to restart the services running (pink screen) --> press Enter.
 
 - After the installation process complete, log out and log in again. Next, run `VMs/test-software.sh`. Observe whether the different software packages were installed correctly or contrarily there is any error.
 
