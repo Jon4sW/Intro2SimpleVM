@@ -17,7 +17,7 @@ Workshop repository for an introduction to SimpleVM (cloud computing resources w
 4. (Advanced) Collaboration through Version Control Systems (GitHub)
 
 5. (Advanced) Automation with Ansible
-
+ 
 
 # (Local) Requirements
 
