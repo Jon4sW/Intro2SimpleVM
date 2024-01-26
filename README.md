@@ -100,6 +100,6 @@ In order to demonstrate how powerful Ansible is, we'll repeat step 1 , however, 
 
 - Download the Pangenotyping role from the Ansible-Galaxy community by executing `ansible-galaxy role install albertodescalzo.pangenotyping`
 
-- Then, clone the repo in  your desired directory, and execute `ansible-playbook Ansible/main.yml` in the directory folder.
+- Then, clone the repo in your desired directory, and execute `ansible-playbook Ansible/main.yml` in the directory folder.s
 
 For more details about the tasks in the role, please visit [the role description](https://github.com/albertodescalzo/ansible-role-pangenotyping). More roles can be found under [Ansible-Galaxy website](https://galaxy.ansible.com/ui/standalone/roles/).
