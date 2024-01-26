@@ -1,0 +1,12 @@
+### Copy a local folder to remote
+scp -r /path/to/local/folder username@vm_ip_address:/path/to/destination/folder
+
+### starts an interactive shell with superuser privileges
+sudo -i 
+
+### useful to access ec2 instances through username=root, instead of ubuntu 
+sudo cp ~/.ssh/authorized_keys /root/.ssh/
+
+### Observe and kill processes
+pkill -f "process_name"
+pgrep -fl "process_name"

@@ -28,7 +28,7 @@ rule align_reads:
 		runtime_min = 1
 	threads: 27
 	log:
-		bwa_mem="preprocessing/downsampling/{callset}/{coverage}/aligned/{sample}_full_mem_unsorted.log"
+		bwa_mem="preprocessing/downsampling/{callset}/{coverage}/aligned/{sample}_full_mem_unsorted.log",
 		sorted_mem="preprocessing/downsampling/{callset}/{coverage}/aligned/{sample}_full_mem.log"
 	shell:
 		"""
